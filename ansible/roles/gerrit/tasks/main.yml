@@ -20,10 +20,3 @@
 - name: install gerrit
   sudo: yes
   shell: "docker run -p 35729:8080 -P -d larrycai/gerrit"
-
-- name: Wait until we get to 200
-  command: curl --head --silent {{ gerrit_base_url }}/
-  register: result
-  until: result.stdout.find("200 OK") != -1
-  async: 45
-  poll: 5

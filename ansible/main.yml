@@ -3,10 +3,8 @@
   hosts: development
   roles:
     - jenkins_server
+    - jenkins_plugins
+    - jenkins_jobs
+    #- jenkins_scripts
     - sonar
     - gerrit
-    #- jenkins_plugins
-    #- jenkins_jobs
-    #- jenkins_scripts
-    #- sonar
-    #- gerrit
