@@ -1,0 +1,14 @@
+import jenkins.model.*
+import hudson.plugins.sonar.*
+import hudson.tools.*
+
+def inst = Jenkins.getInstance()
+
+def desc = inst.getDescriptor("hudson.plugins.sonar.SonarRunnerInstallation")
+
+def installer = new SonarRunnerInstaller("[sonar runner version]")
+def prop = new InstallSourceProperty([installer])
+def sinst = new SonarRunnerInstallation("[name of the sonar runner - I called it Default]", "[home? - not sure how this is used and I left it blank]", [prop])
+desc.setInstallations(sinst)
+
+desc.save()

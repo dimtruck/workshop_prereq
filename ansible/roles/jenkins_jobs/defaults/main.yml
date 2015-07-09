@@ -1,2 +1,57 @@
+nodejs_nodesource_pin_priority: 500
+
 jenkins_jobs:
   git_dest: '/var/lib/jenkins/autocreator' 
+  git_source: 'https://github.com/dimtruck/workshop_autocreator.git'
+jenkins_server:
+  version: 1.592-1.1
+  dest: /opt/jenkins
+  lib: /var/lib/jenkins
+  port: 8080
+  prefix: /jenkins
+  cli_dest: '/var/lib/jenkins/jenkins-cli.jar'
+
+  views:
+    list:
+      - { name: 'All',
+          description: 'All',
+          includeRegex: '.*',
+          columns: &all_columns_view [
+            'hudson.views.StatusColumn',
+            'hudson.views.WeatherColumn',
+            'hudson.views.JobColumn',
+            'hudson.views.LastSuccessColumn',
+            'hudson.views.LastFailureColumn',
+            'hudson.views.LastDurationColumn',
+            'hudson.views.BuildButtonColumn']}
+
+      - { name: 'Downstream Flow',
+          description: 'Internal patch flow',
+          includeRegex: 'downstream.*',
+          columns: *all_columns_view }
+
+      - { name: 'Upstream Flow',
+          description: 'External patch flow',
+          includeRegex: 'upstream.*',
+          columns: *all_columns_view }
+
+      - { name: 'Main Flow',
+          description: 'Main flow',
+          includeRegex: 'main.*',
+          columns: *all_columns_view }
+
+    # the pipeline block is used to configure the PIPELINE views
+    # in jenkins.
+    pipeline:
+      - { name: 'PIPELINE1',
+          selectedJob: 'DSL_DEPLOY-job1',
+          firstJob: 'DSL_DEPLOY-job1',
+          noOfDisplayedBuilds: '5',
+          buildViewTitle: 'Deployment Pipeline 1' }
+
+      - { name: 'PIPELINE2',
+          selectedJob: 'jinja2_deploy_zabbix',
+          firstJob: 'jinja2_deploy_zabbix',
+          noOfDisplayedBuilds: '5',
+          startsWithParameters: true,
+          buildViewTitle: 'Zabbix Deployment Pipeline' }

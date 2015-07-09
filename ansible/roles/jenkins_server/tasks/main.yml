@@ -13,7 +13,6 @@
     - jenkins
     - git
     - python-pip
-    - docker
 
 - name: Configure
   template: src="{{ item.src }}"

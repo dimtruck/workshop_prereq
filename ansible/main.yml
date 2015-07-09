@@ -5,6 +5,6 @@
     - jenkins_server
     - jenkins_plugins
     - jenkins_jobs
-    #- jenkins_scripts
+    - jenkins_scripts
     - sonar
     - gerrit

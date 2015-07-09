@@ -1,0 +1,3 @@
+jenkins_scripts:
+  port: 8080
+  cli_dest: '/var/lib/jenkins/jenkins-cli.jar' # Jenkins CLI destination

@@ -1,17 +1,91 @@
 ---
+# Install node js
+- name: Ensure the system can use the HTTPS transport for APT
+  stat: path=/usr/lib/apt/methods/https
+  register: apt_https_transport
+
+- name: Install HTTPS transport for APT
+  apt: pkg=apt-transport-https state=installed
+  when: not apt_https_transport.stat.exists
+
+- name: Import the NodeSource GPG key into apt
+  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+
+- name: Add NodeSource deb repository
+  apt_repository: repo='deb https://deb.nodesource.com/node {{ ansible_distribution_release }} main' state=present
+
+- name: Add NodeSource deb-src repository
+  apt_repository: repo='deb-src https://deb.nodesource.com/node {{ ansible_distribution_release }} main' state=present
+  tags:
+    - repose
+    - origin
+
+- name: Add NodeSource repository preferences
+  template:
+    src: etc/apt/preferences.d/deb_nodesource_com_node.pref.2
+    dest: /etc/apt/preferences.d/deb_nodesource_com_node.pref
+  tags:
+    - repose
+    - origin
+
+- name: Install Node.js
+  apt: pkg=nodejs state=installed update_cache=yes
+  tags:
+    - repose
+    - origin
+
+- name: Install build-essential
+  apt: pkg=build-essential state=latest update_cache=yes cache_valid_time=86400
+  tags:
+    - repose
+    - origin
+
+- name: Create npm_global directory
+  file: path=/home/vagrant/npm_global state=directory mode=0755
+  
+- name: Set npm installation to npm_global
+  shell: npm config set prefix '/home/vagrant/npm_global'
+  
+- name: Install bower globally
+  npm: name=bower global=yes
+  
+- name: Install grunt globally
+  npm: name=grunt-cli global=yes
+
 # Clone pre-req repository
 - name: Clone pre-req repository
   sudo: yes
-  git: repo=https://github.com/Rax-io-CI-CD/raxio_prereqs.git
+  git: repo={{jenkins_jobs['git_source']}}
     dest={{jenkins_jobs['git_dest']}}
   tags: ['jenkins', 'jenkins_jobs']
   
 - name: Install reqs
   sudo: yes
-  shell: "pip install -r /var/lib/jenkins/autocreator/src/autocreator/requirements.txt"
+  shell: "pip install -r {{jenkins_jobs['git_dest']}}/requirements.txt"
   tags: ['jenkins', 'jenkins_jobs']
   
-- name: Run autocreator job
+- name: Run autocreator upstream job
   sudo: yes
-  shell: chdir={{jenkins_jobs['git_dest']}}/src/autocreator ./autocreator.py  -d jobs -job raxio_jobs_data -url 'localhost:8080' -http
+  shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job upstream -url 'localhost:8080' -http
   tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Run autocreator downstream job
+  sudo: yes
+  shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job downstream -url 'localhost:8080' -http
+  tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Run autocreator main job
+  sudo: yes
+  shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job main -url 'localhost:8080' -http
+  tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Update views
+  template: src={{item.src}} dest={{item.dest}}  owner=jenkins backup=yes
+  with_items:
+  - {src: config.xml.j2 , dest: /var/lib/jenkins/config.xml }
+  notify:
+    - restart jenkins
+
+#- name: Update sonar plugin
+
+#- name: Update github plugin

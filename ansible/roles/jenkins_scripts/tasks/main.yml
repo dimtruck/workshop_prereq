@@ -1,0 +1,17 @@
+- name: Copy scripts
+  template: src={{item.src}} dest={{item.dest}} owner=jenkins backup=yes
+  with_items:
+    - {src: location.groovy.j2 , dest: /var/lib/jenkins/location.groovy }
+    - {src: scm.groovy.j2 , dest: /var/lib/jenkins/scm.groovy }
+    - {src: sonar.groovy.j2 , dest: /var/lib/jenkins/sonar.groovy }
+    - {src: sonar_runner.groovy.j2 , dest: /var/lib/jenkins/sonar_runner.groovy }
+    - {src: gerrit-trigger.xml.j2 , dest: /var/lib/jenkins/gerrit-trigger.xml }
+    - {src: org.jenkinsci.plugins.ghprb.GhprbTrigger.xml.j2 , dest: /var/lib/jenkins/org.jenkinsci.plugins.ghprb.GhprbTrigger.xml }
+    
+- name: Install scripts with groovy
+  command: java -jar {{ jenkins_scripts['cli_dest'] }} -s http://localhost:{{ jenkins_scripts['port'] }} groovy {{item}}
+  with_items:
+    - /var/lib/jenkins/location.groovy
+    - /var/lib/jenkins/scm.groovy
+    - /var/lib/jenkins/sonar.groovy
+    - /var/lib/jenkins/sonar_runner.groovy
