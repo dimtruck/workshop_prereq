@@ -1,0 +1,29 @@
+# Install docker
+- name: Install docker
+  sudo: yes
+  shell: "wget -qO- https://get.docker.com/ | sh"
+  tags: ['sonar']
+  
+# Install docker-py  
+- name: Install docker-py
+  sudo: yes
+  pip: name=docker-py version=1.1.0
+  tags: ['sonar']
+
+- name: Copy over gerrit.config
+  file: path=/opt/gerrit state=directory mode=0755
+
+- name: Copy over gerrit.config
+  copy: src=gerrit.config dest=/home/vagrant/gerrit.config
+
+# Install gerrit 
+- name: install gerrit
+  sudo: yes
+  shell: "docker run -p 35729:8080 -P -d larrycai/gerrit"
+
+- name: Wait until we get to 200
+  command: curl --head --silent {{ gerrit_base_url }}/
+  register: result
+  until: result.stdout.find("200 OK") != -1
+  async: 45
+  poll: 5

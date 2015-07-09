@@ -1,0 +1,12 @@
+---
+- name: QE Tech Talk Workshop
+  hosts: development
+  roles:
+    - jenkins_server
+    - sonar
+    - gerrit
+    #- jenkins_plugins
+    #- jenkins_jobs
+    #- jenkins_scripts
+    #- sonar
+    #- gerrit

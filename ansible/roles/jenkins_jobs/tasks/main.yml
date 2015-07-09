@@ -1,0 +1,17 @@
+---
+# Clone pre-req repository
+- name: Clone pre-req repository
+  sudo: yes
+  git: repo=https://github.com/Rax-io-CI-CD/raxio_prereqs.git
+    dest={{jenkins_jobs['git_dest']}}
+  tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Install reqs
+  sudo: yes
+  shell: "pip install -r /var/lib/jenkins/autocreator/src/autocreator/requirements.txt"
+  tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Run autocreator job
+  sudo: yes
+  shell: chdir={{jenkins_jobs['git_dest']}}/src/autocreator ./autocreator.py  -d jobs -job raxio_jobs_data -url 'localhost:8080' -http
+  tags: ['jenkins', 'jenkins_jobs']

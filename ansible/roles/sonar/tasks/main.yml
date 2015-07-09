@@ -1,0 +1,23 @@
+# Install docker
+- name: Install docker
+  sudo: yes
+  shell: "wget -qO- https://get.docker.com/ | sh"
+  tags: ['sonar']
+  
+# Install docker-py  
+- name: Install docker-py
+  sudo: yes
+  pip: name=docker-py version=1.1.0
+  tags: ['sonar']
+
+# Install sonar 
+- name: data container
+  sudo: yes
+  shell: "docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:5.1"
+  #docker:
+  #  name: sonar
+  #  image: sonarqube:5.1
+  #  state: started
+  #  expose: 
+  #    - "9000:9000"
+  #    - "9092:9092"
