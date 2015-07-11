@@ -41,10 +41,10 @@
     - origin
 
 - name: Create npm_global directory
-  file: path=/home/vagrant/npm_global state=directory mode=0755
+  file: path={{ user_location }}/npm_global state=directory mode=0755
   
 - name: Set npm installation to npm_global
-  shell: npm config set prefix '/home/vagrant/npm_global'
+  shell: npm config set prefix '{{ user_location }}/npm_global'
   
 - name: Install bower globally
   npm: name=bower global=yes
@@ -85,7 +85,3 @@
   - {src: config.xml.j2 , dest: /var/lib/jenkins/config.xml }
   notify:
     - restart jenkins
-
-#- name: Update sonar plugin
-
-#- name: Update github plugin

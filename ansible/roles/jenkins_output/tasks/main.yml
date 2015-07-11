@@ -1,0 +1,13 @@
+- name: show login credentials
+  debug: msg="ssh root@{{item.rax_accessipv4}} with password {{item.rax_adminpass }}"
+  with_items: jenkins_nodes.success
+  when: jenkins_nodes.action == "create"  
+  
+- name: show Jenkins
+  debug: var=jenkins_load_balancer.balancer.virtual_ips[0].address
+
+- name: show Sonar
+  debug: var=sonar_load_balancer.balancer.virtual_ips[0].address
+
+- name: show Gerrit
+  debug: var=gerrit_load_balancer.balancer.virtual_ips[0].address

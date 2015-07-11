@@ -1,0 +1,25 @@
+---
+- name: QE Tech Talk Workshop
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  roles:
+    - jenkins_cloud
+    
+- name: Set up ci
+  hosts: jenkins    
+  gather_facts: True
+  roles:
+    - jenkins_server
+    - jenkins_plugins
+    - jenkins_jobs
+    - jenkins_scripts
+    - sonar
+    - gerrit
+
+- name: View lb data
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  roles:
+    - jenkins_output

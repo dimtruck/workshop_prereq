@@ -5,12 +5,12 @@
       <name>Openstack</name>
       <noConnectionOnStartup>false</noConnectionOnStartup>
       <config class="com.sonyericsson.hudson.plugins.gerrit.trigger.config.Config">
-        <gerritHostName><%= @gerrit_host_name %></gerritHostName>
-        <gerritSshPort><%= @gerrit_host_port %></gerritSshPort>
+        <gerritHostName>{{ gerrit_host }}</gerritHostName>
+        <gerritSshPort><{{ gerrit['host_port']}}</gerritSshPort>
         <gerritProxy></gerritProxy>
-        <gerritUserName><%= @gerrit_user_name %></gerritUserName>
-        <gerritEMail><%= @gerrit_email %></gerritEMail>
-        <gerritAuthKeyFile>/home/jenkins/.ssh/id_rsa</gerritAuthKeyFile>
+        <gerritUserName>{{ gerrit['user_name']}}</gerritUserName>
+        <gerritEMail>{{ gerrit['user_email']}}</gerritEMail>
+        <gerritAuthKeyFile>{{ gerrit['user_key']}}</gerritAuthKeyFile>
         <useRestApi>false</useRestApi>
         <restCodeReview>false</restCodeReview>
         <restVerified>false</restVerified>
@@ -20,7 +20,7 @@
         <gerritVerifiedCmdBuildFailed>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;Build Failed &lt;BUILDS_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildFailed>
         <gerritVerifiedCmdBuildStarted>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;Build Started &lt;BUILDURL&gt; &lt;STARTED_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildStarted>
         <gerritVerifiedCmdBuildNotBuilt>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;No Builds Executed &lt;BUILDS_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildNotBuilt>
-        <gerritFrontEndUrl>http://<%= @gerrit_host_name %>/</gerritFrontEndUrl>
+        <gerritFrontEndUrl>http://{{ gerrit_host }}/</gerritFrontEndUrl>
         <gerritBuildStartedVerifiedValue>0</gerritBuildStartedVerifiedValue>
         <gerritBuildStartedCodeReviewValue>0</gerritBuildStartedCodeReviewValue>
         <gerritBuildSuccessfulVerifiedValue>0</gerritBuildSuccessfulVerifiedValue>

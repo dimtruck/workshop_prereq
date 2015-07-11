@@ -13,6 +13,13 @@
     - jenkins
     - git
     - python-pip
+    - build-essential
+    - libxml2-dev
+    - libxslt1-dev 
+    - python-dev
+
+- name: Install more stuff
+  pip: name=virtualenv  
 
 - name: Configure
   template: src="{{ item.src }}"
@@ -25,3 +32,15 @@
 
 - name: Restart Jenkins
   service: name=jenkins state=restarted
+  
+- name: Set up global git user.name
+  command: "su jenkins -l -c 'git config --global user.name test'"
+  
+- name: Set up global git user.email
+  command: "su jenkins -l -c 'git config --global user.email test@example.com'"
+
+- name: Create ssh directory
+  file: path=/var/lib/jenkins/.ssh state=directory mode=0755 owner=jenkins group=jenkins
+
+- name: Fetch over ssh key
+  copy: src=workshop.key dest=/var/lib/jenkins/.ssh/id_rsa owner=jenkins group=jenkins mode=0400

@@ -78,4 +78,7 @@ jenkins_plugins:
     { name: 'sonar', version: '2.1'},
     { name: 'gerrit-trigger', version: '2.14.0'},
     { name: 'job-log-logger-plugin', version: '1.0'},
-    { name: 'translation', version: '1.12'} ]
+    { name: 'translation', version: '1.12'},
+    { name: 'shiningpanda', version: '0.21'},
+    { name: 'python', version: '1.2'},
+    { name: 'python-wrapper', version: '1.0.3'} ]

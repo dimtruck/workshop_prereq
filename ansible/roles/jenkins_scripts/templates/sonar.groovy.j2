@@ -7,18 +7,18 @@ def inst = Jenkins.getInstance()
 def desc = inst.getDescriptor("hudson.plugins.sonar.SonarPublisher")
 
 def sinst = new SonarInstallation(
-  "arbor-sonar-test",
+  "{{ sonar['user_name'] }}",
   false,
-  "http://23.253.76.102",
-  "jdbc:mysql://23.253.76.102:81/solum?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&autoReconnect=true",
+  "{{ sonar['url'] }}",
+  "{{ sonar['db'] }}",
   "com.mysql.jdbc.Driver",
-  "#{sonar['db_user']}",
-  "#{sonar['db_password']}",
+  "{{sonar['db_user']}}",
+  "{{sonar['db_password']}}",
   "",
   "",
   new TriggersConfig(),
-  "#{sonar['sonar_user']}",
-  "#{sonar['sonar_password']}"
+  "{{sonar['sonar_user']}}",
+  "{{sonar['sonar_password']}}"
 )
 desc.setInstallations(sinst)
 

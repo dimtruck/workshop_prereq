@@ -39,19 +39,3 @@ jenkins_server:
           description: 'Main flow',
           includeRegex: 'main.*',
           columns: *all_columns_view }
-
-    # the pipeline block is used to configure the PIPELINE views
-    # in jenkins.
-    pipeline:
-      - { name: 'PIPELINE1',
-          selectedJob: 'DSL_DEPLOY-job1',
-          firstJob: 'DSL_DEPLOY-job1',
-          noOfDisplayedBuilds: '5',
-          buildViewTitle: 'Deployment Pipeline 1' }
-
-      - { name: 'PIPELINE2',
-          selectedJob: 'jinja2_deploy_zabbix',
-          firstJob: 'jinja2_deploy_zabbix',
-          noOfDisplayedBuilds: '5',
-          startsWithParameters: true,
-          buildViewTitle: 'Zabbix Deployment Pipeline' }

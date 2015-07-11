@@ -1,13 +1,16 @@
-jenkins_scripts:
-  port: 8080
-  cli_dest: '/var/lib/jenkins/jenkins-cli.jar' # Jenkins CLI destination
-gerrit_host: localhost
+---
+creds_path:      "~/projects/workshop_prereq/ansible/.raxpub"
+jenkins_jobs:
+  git_dest: '/var/lib/jenkins/autocreator' 
+  git_source: 'https://github.com/dimtruck/workshop_autocreator.git'
+user_location: "/var/lib/jenkins"
 gerrit:
-  host_port: 35729
+  gerrit_host: localhost
+  host_port: 80
   user_name: jenkins
   user_email: jenkins@example.com
-  user_key: /home/jenkins/.ssh/id_rsa
-email_address: jenkins@example.com
+  user_key: /var/lib/jenkins/.ssh/id_rsa
+email_address: jenkins@example.com  
 ghprb:
   username: admin
   password: password
@@ -24,4 +27,4 @@ sonar:
   db_user: admin
   db_password: admin
   sonar_user: sonar
-  sonar_password: sonar 
+  sonar_password: sonar

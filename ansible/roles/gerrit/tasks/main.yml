@@ -14,7 +14,7 @@
   file: path=/opt/gerrit state=directory mode=0755
 
 - name: Copy over gerrit.config
-  copy: src=gerrit.config dest=/home/vagrant/gerrit.config
+  copy: src=gerrit.config dest={{ user_location }}/gerrit.config
 
 # Install gerrit 
 - name: install gerrit

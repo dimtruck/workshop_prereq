@@ -1,0 +1,7 @@
+---
+- name: QE Tech Talk Workshop
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  roles:
+    - clean_up
