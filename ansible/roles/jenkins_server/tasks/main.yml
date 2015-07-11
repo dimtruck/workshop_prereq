@@ -17,6 +17,7 @@
     - libxml2-dev
     - libxslt1-dev 
     - python-dev
+    - sshpass
 
 - name: Install more stuff
   pip: name=virtualenv  
