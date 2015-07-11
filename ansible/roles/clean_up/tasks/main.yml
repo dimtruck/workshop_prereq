@@ -52,7 +52,7 @@
     module: rax
     credentials: "{{ creds_path }}"
     name: "jenkins"
-    flavor: "performance1-2"
+    flavor: "performance1-4"
     image: "a1558fdc-3182-4a0f-b48a-aa900a5826c3"
     region: "DFW"
     state: absent
