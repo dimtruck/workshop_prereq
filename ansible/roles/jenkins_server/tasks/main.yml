@@ -45,6 +45,9 @@
 
 - name: Fetch over ssh key
   copy: src=workshop.key dest=/var/lib/jenkins/.ssh/id_rsa owner=jenkins group=jenkins mode=0400
+
+- name: Fetch over ssh pub key
+  copy: src=workshop.key.pub dest=/var/lib/jenkins/.ssh/id_rsa.pub owner=jenkins group=jenkins mode=0400
   
 - name: Copy over raxpub file
   copy: src=.raxpub dest=/var/lib/jenkins/.raxpub owner=jenkins group=jenkins mode=0440
