@@ -52,7 +52,7 @@
 - name: Install grunt globally
   npm: name=grunt-cli global=yes
   
-- name: Install grunt globally
+- name: Install protractor globally
   npm: name=protractor global=yes
 
 # Clone pre-req repository
@@ -90,5 +90,5 @@
     - restart jenkins
 
 - name: Set perms on npm_global directory
-  file: path=/var/lib/jenkins_npm_global state=directory mode=0755 owner=jenkins group=jenkins recurse=yes
+  file: path=/var/lib/jenkins/npm_global state=directory mode=0755 owner=jenkins group=jenkins recurse=yes
   tags: ['jenkins', 'jenkins_jobs']

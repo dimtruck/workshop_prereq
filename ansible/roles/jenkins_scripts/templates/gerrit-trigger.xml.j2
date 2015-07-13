@@ -6,7 +6,7 @@
       <noConnectionOnStartup>false</noConnectionOnStartup>
       <config class="com.sonyericsson.hudson.plugins.gerrit.trigger.config.Config">
         <gerritHostName>{{ gerrit_host }}</gerritHostName>
-        <gerritSshPort><{{ gerrit['host_port']}}</gerritSshPort>
+        <gerritSshPort>{{ gerrit['host_port']}}</gerritSshPort>
         <gerritProxy></gerritProxy>
         <gerritUserName>{{ gerrit['user_name']}}</gerritUserName>
         <gerritEMail>{{ gerrit['user_email']}}</gerritEMail>
