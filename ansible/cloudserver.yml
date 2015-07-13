@@ -15,7 +15,6 @@
     - jenkins_jobs
     - jenkins_scripts
     - sonar
-    - gerrit
     - gatling
 
 - name: View lb data
