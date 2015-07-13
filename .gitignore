@@ -1,0 +1,4 @@
+ansible/.raxpub
+ansible/workshop.key
+ansible/workshop.key.pub
+.vagrant/
