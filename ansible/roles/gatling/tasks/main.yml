@@ -14,10 +14,10 @@
   file: state=directory path=/var/lib/jenkins/gatling owner=jenkins group=jenkins
 
 - name: download gatling
-  get_url: url={{ gatling_url }} dest=.
+  get_url: url={{ gatling_url }} dest=/var/lib/jenkins/gatling
 
 - name: unrar gatling file
-  shell: unzip {{ gatling_zip }} -d gatling
+  shell: unzip /var/lib/jenkins/gatling/{{ gatling_zip }} -d gatling
 
 - name: sym link gatling.sh
   file: src=/var/lib/jenkins/gatling/{{ gatling_bundle }}/bin/gatling.sh dest=/usr/bin/gatling state=link owner=jenkins group=jenkins
