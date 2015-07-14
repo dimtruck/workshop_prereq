@@ -8,6 +8,3 @@
 
 - name: show Sonar
   debug: var=sonar_load_balancer.balancer.virtual_ips[0].address
-
-- name: show Gerrit
-  debug: var=gerrit_load_balancer.balancer.virtual_ips[0].address

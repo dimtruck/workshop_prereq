@@ -29,23 +29,7 @@
     wait_timeout: 600
     state: present
   register: sonar_load_balancer
-  
-# This will either create a new gerrit load balancer or return the old one
-- name: Create gerrit load balancer
-  local_action:
-    module: rax_clb
-    credentials: "{{ creds_path }}"
-    name: "gerrit_lb"
-    port: "80"
-    protocol: "HTTP"
-    type: PUBLIC
-    timeout: 30
-    region: "DFW"
-    wait: yes
-    wait_timeout: 600
-    state: present
-  register: gerrit_load_balancer
-    
+   
 # Create jenkins node
 - name: Create jenkins server
   local_action:    
@@ -111,23 +95,7 @@
   with_items: jenkins_nodes.success
   when: jenkins_nodes.action == "create"
   
-# Add jenkins servers to gerrit load balancer
-- name: Add Jenkins servers to Gerrit Load balancer
-  local_action:
-    module: rax_clb_nodes
-    credentials: "{{ creds_path }}"
-    load_balancer_id: "{{ gerrit_load_balancer.balancer.id }}"
-    address: "{{ item.rax_addresses.private[0].addr }}"
-    port: "35729" 
-    condition: enabled
-    type: primary
-    wait: yes
-    wait_timeout: 600
-    region: "DFW"
-  with_items: jenkins_nodes.success
-  when: jenkins_nodes.action == "create" 
-  
 - name: Save gerrit load balancer as gerrit hostname
   set_fact:
-    gerrit_host: "{{gerrit_load_balancer.balancer.virtual_ips[0].address}}"
+    gerrit_host: "localhost"
     

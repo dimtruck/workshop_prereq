@@ -1,11 +1,11 @@
-- name: Add java repositories
-  apt_repository: repo='ppa:webupd8team/java' update_cache=yes
+#- name: Add java repositories
+#  apt_repository: repo='ppa:webupd8team/java' update_cache=yes
   
-- name: Shell accepted oracle license
-  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+#- name: Shell accepted oracle license
+#  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
 
-- name: Install java7
-  apt: pkg=oracle-java7-installer update_cache=yes state=installed
+#- name: Install java7
+#  apt: pkg=oracle-java7-installer update_cache=yes state=installed
 
 - name: Install unzip
   apt: pkg=unzip update_cache=yes state=installed
@@ -17,7 +17,7 @@
   get_url: url={{ gatling_url }} dest=/var/lib/jenkins/gatling
 
 - name: unrar gatling file
-  shell: unzip /var/lib/jenkins/gatling/{{ gatling_zip }} -d gatling
+  shell: unzip /var/lib/jenkins/gatling/{{ gatling_zip }} -d /var/lib/jenkins/gatling
 
 - name: sym link gatling.sh
   file: src=/var/lib/jenkins/gatling/{{ gatling_bundle }}/bin/gatling.sh dest=/usr/bin/gatling state=link owner=jenkins group=jenkins
@@ -26,4 +26,7 @@
   file: path=/var/lib/jenkins/gatling/{{ gatling_bundle }}/user-files/simulations state=absent
 
 - name: install uuid runtime package on local 
-  local_action: apt pkg=uuid-runtime state=latest   
+  apt: pkg=uuid-runtime state=latest   
+
+- name: Set perms on gatling directory
+  file: path=/var/lib/jenkins/gatling state=directory mode=0755 owner=jenkins group=jenkins recurse=yes
