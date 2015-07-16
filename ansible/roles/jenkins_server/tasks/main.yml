@@ -1,4 +1,7 @@
 ---
+- name: update apt
+  apt: update_cache=yes
+  
 - name: Add Jenkins repository's apt key
   action: apt_key url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
           state=present

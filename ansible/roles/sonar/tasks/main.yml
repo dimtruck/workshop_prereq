@@ -9,11 +9,22 @@
   sudo: yes
   pip: name=docker-py version=1.1.0
   tags: ['sonar']
+  
+# Copy over docker
+- name: copy over dockerfile
+  sudo: yes
+  copy: src=Dockerfile dest=/opt/Dockerfile
+  
+# Build container
+- name: Build container
+  sudo: yes
+  command: docker build -t sonar .
+  chdir: /opt
 
 # Install sonar 
-- name: data container
+- name: install sonar
   sudo: yes
-  shell: "docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:5.1"
+  shell: "docker run -d --name sonar_container -p 9000:9000 -p 9092:9092 sonar"
   #docker:
   #  name: sonar
   #  image: sonarqube:5.1

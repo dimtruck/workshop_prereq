@@ -29,22 +29,6 @@
     wait_timeout: 600
     state: absent
   register: sonar_load_balancer
-  
-# This will either create a new gerrit load balancer or return the old one
-- name: Delete gerrit load balancer
-  local_action:
-    module: rax_clb
-    credentials: "{{ creds_path }}"
-    name: "gerrit_lb"
-    port: "80"
-    protocol: "HTTP"
-    type: PUBLIC
-    timeout: 30
-    region: "DFW"
-    wait: yes
-    wait_timeout: 600
-    state: absent
-  register: gerrit_load_balancer
     
 # Create jenkins node
 - name: Delete jenkins server
