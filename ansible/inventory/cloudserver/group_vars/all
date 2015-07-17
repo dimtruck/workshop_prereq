@@ -22,9 +22,10 @@ scm:
   global_config_email: jenkins@example.com
 sonar:
   user_name: sonar-test
-  url: http://localhost:9090,
+  url: http://localhost:9000,
   db: jdbc:h2:tcp://localhost:9092/sonar
   db_user: admin
   db_password: admin
   sonar_user: sonar
   sonar_password: sonar
+sonar_host: http://localhost:9000  

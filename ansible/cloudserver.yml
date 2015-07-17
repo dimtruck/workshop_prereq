@@ -14,8 +14,8 @@
     - jenkins_plugins
     - jenkins_jobs
     - jenkins_scripts
-    - sonar
     - gatling
+    - sonar
 
 - name: View lb data
   hosts: localhost

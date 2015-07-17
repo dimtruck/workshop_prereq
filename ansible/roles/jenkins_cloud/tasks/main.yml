@@ -95,7 +95,27 @@
   with_items: jenkins_nodes.success
   when: jenkins_nodes.action == "create"
   
+# Add jenkins servers to gerrit load balancer
+- name: Add Jenkins servers to Gerrit Load balancer
+  local_action:
+    module: rax_clb_nodes
+    credentials: "{{ creds_path }}"
+    load_balancer_id: "{{ gerrit_load_balancer.balancer.id }}"
+    address: "{{ item.rax_addresses.private[0].addr }}"
+    port: "9000" 
+    condition: enabled
+    type: primary
+    wait: yes
+    wait_timeout: 600
+    region: "DFW"
+  with_items: jenkins_nodes.success
+  when: jenkins_nodes.action == "create"
+  
 - name: Save gerrit load balancer as gerrit hostname
   set_fact:
     gerrit_host: "localhost"
-    
+  
+- name: Save sonar load balancer as sonar hostname
+  set_fact:
+    sonar_host: "{{ sonar_load_balancer.balancer.virtual_ips[0].address }}"
+        

@@ -9,7 +9,7 @@ def desc = inst.getDescriptor("hudson.plugins.sonar.SonarPublisher")
 def sinst = new SonarInstallation(
   "{{ sonar['user_name'] }}",
   false,
-  "{{ sonar['url'] }}",
+  "{{ sonar_host }}",
   "{{ sonar['db'] }}",
   "com.mysql.jdbc.Driver",
   "{{sonar['db_user']}}",

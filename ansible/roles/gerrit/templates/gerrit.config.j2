@@ -1,6 +1,6 @@
 [gerrit]
 	basePath = git
-	canonicalWebUrl = http://localhost:8080/
+	canonicalWebUrl = http://{{ gerrit_load_balancer.balancer.virtual_ips[0].address }}/
 [database]
 	type = H2
 	database = db/ReviewDB

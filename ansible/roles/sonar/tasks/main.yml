@@ -1,3 +1,10 @@
+# Unzip sonar-runner
+- name: Unzip sonar-runner
+  sudo: yes
+  unarchive: src=sonar-runner-dist-2.4.zip dest=/var/lib/jenkins
+  tags: ['sonar']
+  
+
 # Install docker
 - name: Install docker
   sudo: yes
@@ -18,8 +25,7 @@
 # Build container
 - name: Build container
   sudo: yes
-  command: docker build -t sonar .
-  chdir: /opt
+  shell: "cd /opt && docker build -t sonar ."
 
 # Install sonar 
 - name: install sonar

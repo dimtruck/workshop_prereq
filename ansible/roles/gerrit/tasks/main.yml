@@ -10,13 +10,26 @@
   pip: name=docker-py version=1.1.0
   tags: ['sonar']
 
-- name: Copy over gerrit.config
+- name: Create /opt/gerrit
   file: path=/opt/gerrit state=directory mode=0755
 
-- name: Copy over gerrit.config
-  copy: src=gerrit.config dest={{ user_location }}/gerrit.config
+- name: Copy over replication.config
+  copy: src=replication.config dest=/opt/gerrit/replication.config
+
+- name: Update gerrit.config
+  template: src=gerrit.config.j2 dest=/opt/gerrit/gerrit.config
+  
+# Copy over docker
+- name: copy over dockerfile
+  sudo: yes
+  copy: src=Dockerfile dest=/opt/gerrit/Dockerfile
+  
+# Build container
+- name: Build container
+  sudo: yes
+  shell: "cd /opt/gerrit && docker build -t gerrit ."
 
 # Install gerrit 
 - name: install gerrit
   sudo: yes
-  shell: "docker run -p 35729:8080 -P -d larrycai/gerrit"
+  shell: "docker run -d --name gerrit_container -p 35729:8080 -p 29418:29418 gerrit"
