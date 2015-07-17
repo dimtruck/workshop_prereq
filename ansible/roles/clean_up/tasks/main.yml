@@ -48,7 +48,6 @@
     wait_timeout: 180
   ignore_errors: yes
   register: delete_result
-  register: jenkins_nodes
     
 # Create jenkins node
 - name: Delete jenkins server...again
@@ -68,4 +67,3 @@
     wait_timeout: 600
   ignore_errors: yes
   when: delete_result|failed
-  register: jenkins_nodes
