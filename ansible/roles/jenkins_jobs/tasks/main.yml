@@ -62,6 +62,14 @@
     dest={{jenkins_jobs['git_dest']}}
   tags: ['jenkins', 'jenkins_jobs']
   
+- name: Update to user's github account
+  sudo: yes
+  shell: "sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  
+- name: Update to user's gerrit account
+  sudo: yes
+  shell: "sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  
 - name: Install reqs
   sudo: yes
   shell: "pip install -r {{jenkins_jobs['git_dest']}}/requirements.txt"
