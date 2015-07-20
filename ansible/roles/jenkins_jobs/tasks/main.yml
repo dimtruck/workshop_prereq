@@ -62,13 +62,45 @@
     dest={{jenkins_jobs['git_dest']}}
   tags: ['jenkins', 'jenkins_jobs']
   
-- name: Update to user's github account
+- name: Update to user's github account for upstream
   sudo: yes
-  shell: "sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/upstream && sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
   
-- name: Update to user's gerrit account
+- name: Update to user's gerrit account for upstream
   sudo: yes
-  shell: "sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/upstream && sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  
+- name: Update to user's github account for downstream
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/downstream && sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  
+- name: Update to user's gerrit account for downstream
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/downstream && sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  
+- name: Update to user's github account for main
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/main && sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  
+- name: Update to user's gerrit account for main
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/main && sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  
+- name: Update to user's github account for staging
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/staging && sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  
+- name: Update to user's gerrit account for staging
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/staging && sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
+  
+- name: Update to user's github account for production
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/production && sed -i '' -e 's/dimtruck/{{ github_user }}/g' *.yml"
+  
+- name: Update to user's gerrit account for production
+  sudo: yes
+  shell: "cd {{jenkins_jobs['git_dest']}}/jobs/production && sed -i '' -e 's/gerrit_user/{{ gerrit_user }}/g' *.yml"
   
 - name: Install reqs
   sudo: yes
