@@ -94,8 +94,3 @@
     region: "DFW"
   with_items: jenkins_nodes.success
   when: jenkins_nodes.action == "create"
-  
-- name: Save sonar load balancer as sonar hostname
-  set_fact:
-    sonar_host: "{{ sonar_load_balancer.balancer.virtual_ips[0].address }}"
-        

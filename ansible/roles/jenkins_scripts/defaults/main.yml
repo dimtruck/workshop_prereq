@@ -1,12 +1,12 @@
 jenkins_scripts:
   port: 8080
   cli_dest: '/var/lib/jenkins/jenkins-cli.jar' # Jenkins CLI destination
-gerrit_host: localhost
 gerrit:
-  host_port: 35729
-  user_name: jenkins
-  user_email: jenkins@example.com
-  user_key: /home/jenkins/.ssh/id_rsa
+  gerrit_host: 23.253.229.56
+  host_port: 29418
+  user_name: dimitry_jenkins
+  user_email: dimitry_jenkins@example.com
+  user_key: /var/lib/jenkins/.ssh/id_rsa
 email_address: jenkins@example.com
 ghprb:
   username: admin

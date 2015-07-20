@@ -5,7 +5,7 @@
       <name>Openstack</name>
       <noConnectionOnStartup>false</noConnectionOnStartup>
       <config class="com.sonyericsson.hudson.plugins.gerrit.trigger.config.Config">
-        <gerritHostName>{{ gerrit_host }}</gerritHostName>
+        <gerritHostName>http://{{ gerrit['gerrit_host'] }}</gerritHostName>
         <gerritSshPort>{{ gerrit['host_port']}}</gerritSshPort>
         <gerritProxy></gerritProxy>
         <gerritUserName>{{ gerrit['user_name']}}</gerritUserName>
@@ -20,7 +20,7 @@
         <gerritVerifiedCmdBuildFailed>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;Build Failed &lt;BUILDS_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildFailed>
         <gerritVerifiedCmdBuildStarted>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;Build Started &lt;BUILDURL&gt; &lt;STARTED_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildStarted>
         <gerritVerifiedCmdBuildNotBuilt>gerrit review &lt;CHANGE&gt;,&lt;PATCHSET&gt; --message &apos;No Builds Executed &lt;BUILDS_STATS&gt;&apos; --verified &lt;VERIFIED&gt; --code-review &lt;CODE_REVIEW&gt;</gerritVerifiedCmdBuildNotBuilt>
-        <gerritFrontEndUrl>http://{{ gerrit_host }}/</gerritFrontEndUrl>
+        <gerritFrontEndUrl>http://{{ gerrit['gerrit_host'] }}/</gerritFrontEndUrl>
         <gerritBuildStartedVerifiedValue>0</gerritBuildStartedVerifiedValue>
         <gerritBuildStartedCodeReviewValue>0</gerritBuildStartedCodeReviewValue>
         <gerritBuildSuccessfulVerifiedValue>0</gerritBuildSuccessfulVerifiedValue>

@@ -1,4 +1,18 @@
 ---
+- name: Save sonar load balancer as sonar hostname
+  set_fact:
+    sonar_host: "{{ hostvars['127.0.0.1']['sonar_load_balancer']['balancer']['virtual_ips'][0]['address'] }}"
+  
+- name: Save jenkins load balancer as jenkins hostname
+  set_fact:
+    jenkins_host: "{{ hostvars['127.0.0.1']['jenkins_load_balancer']['balancer']['virtual_ips'][0]['address'] }}"
+
+- name: print out sonar host
+  debug: var="{{ sonar_host }}"
+
+- name: Print out jenkins host
+  debug: var="{{ jenkins_host }}"
+  
 - name: update apt
   apt: update_cache=yes
   

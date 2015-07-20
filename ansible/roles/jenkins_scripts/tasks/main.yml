@@ -1,3 +1,7 @@
+- name: Sweet mother
+  debug: var={{ gerrit }}
+  
+  
 - name: Copy scripts
   template: src={{item.src}} dest={{item.dest}} owner=jenkins backup=yes
   with_items:

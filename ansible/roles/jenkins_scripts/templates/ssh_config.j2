@@ -5,8 +5,8 @@ Host github.com
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null
    
-Host {{ gerrit_host }}
-  HostName {{ gerrit_host }}
+Host {{ gerrit['gerrit_host'] }}
+  HostName {{ gerrit['gerrit_host'] }}
   User git
   IdentityFile /var/lib/jenkins/.ssh/id_rsa
   StrictHostKeyChecking no

@@ -77,6 +77,16 @@
   shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job downstream -url 'localhost:8080' -http
   tags: ['jenkins', 'jenkins_jobs']
   
+- name: Run autocreator staging job
+  sudo: yes
+  shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job staging -url 'localhost:8080' -http
+  tags: ['jenkins', 'jenkins_jobs']
+  
+- name: Run autocreator production job
+  sudo: yes
+  shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job production -url 'localhost:8080' -http
+  tags: ['jenkins', 'jenkins_jobs']
+  
 - name: Run autocreator main job
   sudo: yes
   shell: chdir={{jenkins_jobs['git_dest']}} ./autocreator.py  -d jobs -job main -url 'localhost:8080' -http

@@ -5,12 +5,12 @@ jenkins_jobs:
   git_source: 'https://github.com/dimtruck/workshop_autocreator.git'
 user_location: "/var/lib/jenkins"
 gerrit:
-  gerrit_host: localhost
-  host_port: 80
-  user_name: jenkins
-  user_email: jenkins@example.com
+  gerrit_host: 23.253.229.56
+  host_port: 29418
+  user_name: dimitry_jenkins
+  user_email: dimitry_jenkins@example.com
   user_key: /var/lib/jenkins/.ssh/id_rsa
-email_address: jenkins@example.com  
+email_address: dimitry_jenkins@example.com  
 ghprb:
   username: admin
   password: password
@@ -24,8 +24,8 @@ sonar:
   user_name: sonar-test
   url: http://localhost:9000,
   db: jdbc:h2:tcp://localhost:9092/sonar
-  db_user: admin
-  db_password: admin
-  sonar_user: sonar
-  sonar_password: sonar
+  db_user: sonar
+  db_password: sonar
+  sonar_user: admin
+  sonar_password: admin 
 sonar_host: http://localhost:9000  

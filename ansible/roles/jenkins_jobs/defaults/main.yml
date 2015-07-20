@@ -39,3 +39,13 @@ jenkins_server:
           description: 'Main flow',
           includeRegex: 'main.*',
           columns: *all_columns_view }
+
+      - { name: 'Staging Flow',
+          description: 'Staging flow',
+          includeRegex: 'staging.*',
+          columns: *all_columns_view }
+
+      - { name: 'Production Flow',
+          description: 'Production flow',
+          includeRegex: 'production.*',
+          columns: *all_columns_view }                    
