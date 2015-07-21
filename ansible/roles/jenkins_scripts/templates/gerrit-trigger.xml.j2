@@ -5,7 +5,7 @@
       <name>Openstack</name>
       <noConnectionOnStartup>false</noConnectionOnStartup>
       <config class="com.sonyericsson.hudson.plugins.gerrit.trigger.config.Config">
-        <gerritHostName>http://{{ gerrit['gerrit_host'] }}</gerritHostName>
+        <gerritHostName>{{ gerrit['gerrit_host'] }}</gerritHostName>
         <gerritSshPort>{{ gerrit['host_port']}}</gerritSshPort>
         <gerritProxy></gerritProxy>
         <gerritUserName>{{ gerrit['user_name']}}</gerritUserName>
