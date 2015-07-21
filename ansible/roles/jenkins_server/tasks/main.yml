@@ -35,6 +35,7 @@
     - libxslt1-dev 
     - python-dev
     - sshpass
+    - unzip
 
 - name: Install more stuff
   pip: name=virtualenv  
@@ -68,3 +69,11 @@
   
 - name: Copy over raxpub file
   copy: src=.raxpub dest=/var/lib/jenkins/.raxpub owner=jenkins group=jenkins mode=0440
+  
+- name: Download github releases
+  get_url: url=https://github.com/aktau/github-release/releases/download/v0.5.3/linux-amd64-github-release.tar.bz2 dest=/var/lib/jenkins/linux-amd64-github-release.tar.bz2
+
+- name: Unzip github releases
+  unarchive: src=/var/lib/jenkins/linux-amd64-github-release.tar.bz2 dest=/var/lib/jenkins copy=no
+  
+  
